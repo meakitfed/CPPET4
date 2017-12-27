@@ -5,6 +5,9 @@
 #include "Pos.hpp"
 #include "Pixel.hpp"
 #include "RGB.hpp"
+#include "Visible.hpp"
+#include "Segment.hpp"
+#include <math.h>
 
 class Ecran
 {
@@ -16,6 +19,7 @@ class Ecran
 	Ecran(){};
 	Ecran(Pos gh1, Pos dh1, Pos gb1, int res): gh(gh1),dh(dh1), gb(gb1), resolution(res) 
 	{ 
+		RGB c;
 		pixel = new Pixel*[resolution];
 		for(int i=0; i<resolution;i++)
 		{
@@ -23,18 +27,48 @@ class Ecran
 		}
 	}
 	void afficher(std::ostream &flux) const;
-	void initColorEcran(RGB backgroundColor);
+	void initEcran(RGB backgroundColor);
+	void drawImage(Pos posCam, std::vector<Visible> obj);
+	Pos getPosAt(int x, int y);
 	Pixel** getPixel() {return pixel;}
 	int getResolution(){return resolution;}
 };
 
-void Ecran::initColorEcran(RGB backgroundColor)
+Pos Ecran::getPosAt(int x, int y)  
+{
+    float r = resolution;
+ 
+    Pos p(gh.getX() + (x/r)*(dh.getX() - gh.getX())
+                + (y/r)* (gb.getX() - gh.getX()),
+            gh.getY() + (x/r)*(dh.getY() - gh.getY())
+                + (y/r)* (gb.getY() - gh.getY()),
+            gb.getZ() + (x/r)*(dh.getZ() - gb.getZ())
+                + (y/r)* (gb.getZ() - gb.getZ()));
+    return p;
+}
+
+void Ecran::initEcran(RGB backgroundColor)
 {
 	for(int i=0; i<resolution;i++)
 	{
 		for(int j=0; j<resolution;j++)
 		{
 			pixel[i][j].setColor(backgroundColor);
+			pixel[i][j].setPosition(getPosAt(i,j));
+		}
+	}
+}
+void Ecran::drawImage(Pos posCam, std::vector<Visible> obj)
+{
+	for(int i=0; i<resolution;i++)
+	{
+		for(int j=0; j<resolution;j++)
+		{
+			Segment s(posCam,pixel[i][j].getPosition());
+			for(std::vector<Visible>::iterator o = obj.begin() ; o != obj.end(); ++o)
+			{
+				
+			}
 		}
 	}
 }

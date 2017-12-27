@@ -10,6 +10,8 @@
 #include "Camera.hpp"
 #include "Source.hpp"
 #include "Visible.hpp"
+#include "Intersection.hpp"
+#include "Segment.hpp"
 
 using namespace std;
 

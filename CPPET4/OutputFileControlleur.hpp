@@ -37,7 +37,7 @@ class OutputFileControlleur
 	};
 	void writeInOutputFile()
 	{
-		scene->getEcran().initColorEcran(scene->getBackgroundColor());
+		scene->getEcran().initEcran(scene->getBackgroundColor());
 		outputFile << "P3" << std::endl;
 		outputFile << scene->getEcran().getResolution() << " " << scene->getEcran().getResolution() << "\n";
 
@@ -51,7 +51,6 @@ class OutputFileControlleur
 
 			}
 			outputFile << std::endl;
-			std::cout << i << std::endl;
 		}
 		outputFile.close();
 
