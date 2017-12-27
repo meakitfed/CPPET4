@@ -13,7 +13,7 @@ class Visible : public Objets
 	public :
 	Visible() : Objets(){};
 	Visible(Pos p, RGB c, float r): Objets(p), color(c), reflexion(r){};
-
+	virtual bool estTraverse(Segment s);
 	virtual void afficher(std::ostream &flux) const;
 };
 

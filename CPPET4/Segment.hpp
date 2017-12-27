@@ -14,14 +14,10 @@ class Segment
 		vecteur = p1.segment(p2);
 	}
 	Segment prolongeSegment(Intersection i);
-	bool croiseVisible(Visible v);
+	Pos getVecteur(){return vecteur;}
+	Pos getOrigine(){return origine;}
 };
 
-
-bool Segment::croiseVisible(Visible v)
-{
-	return true;
-}
 /*Segment Segment::prolongeSegment(Intersection i)
 {
 	//Todo pour les réflexions
