@@ -67,7 +67,8 @@ void Ecran::drawImage(Pos posCam, std::vector<Visible> obj)
 			Segment s(posCam,pixel[i][j].getPosition());
 			for(std::vector<Visible>::iterator o = obj.begin() ; o != obj.end(); ++o)
 			{
-				int discri = o.estTraverse(s);
+				Visible temp = *o;
+				int discri = temp.estTraverse(s);
 				if(discri>0)
 				{
 

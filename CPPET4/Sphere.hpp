@@ -14,7 +14,7 @@ class Sphere : public Visible
 	Sphere() : Visible() {}
 	Sphere(Pos p, RGB c, float r, float ray) : Visible(p,c,r), rayon(ray) {}
 	void afficher(std::ostream &flux) const;
-	virtual bool estTraverse(Segment s);
+	virtual int estTraverse(Segment s);
 };
 
 
@@ -22,10 +22,10 @@ class Sphere : public Visible
 int Sphere::estTraverse(Segment s)
 {
 	int a = s.getVecteur().getX()*s.getVecteur().getX() + s.getVecteur().getY()*s.getVecteur().getY() +s.getVecteur().getZ()*s.getVecteur().getZ();
-	int b = pow(s.getVecteur().getX()*s.getOrigine().getX()) + pow(s.getVecteur().getY()*s.getOrigine().getY()) + pow(s.getVecteur().getZ()*s.getOrigine.getZ())
-	int c = pow(s.getOrigine().getX()) + pow(s.getOrigine().getY()) + pow(s.getOrigine.getZ()) - pow(rayon);
+	int b = pow((s.getVecteur().getX()*s.getOrigine().getX()),2) + pow((s.getVecteur().getY()*s.getOrigine().getY()),2) + pow((s.getVecteur().getZ()*s.getOrigine().getZ()),2);
+	int c = pow((s.getOrigine().getX()),2) + pow((s.getOrigine().getY()),2) + pow((s.getOrigine().getZ()),2) - pow(rayon,2);
 
-	int discri = pow(b) - 4*a*c;
+	int discri = pow(b,2) - 4*a*c;
 	if(discri >= 0)
 	{
 		return discri;
