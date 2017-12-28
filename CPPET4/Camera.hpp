@@ -6,12 +6,14 @@
 #include <cstdlib>
 #include <string>
 #include "Objets.hpp"
+#include "Pos.hpp"
 
 class Camera : public Objets
 {
 	public :
 	Camera() : Objets(){};
 	void afficher(std::ostream &flux) const;
+	Pos getPosition(){return position;}
 };
 
 void Camera::afficher(std::ostream &flux) const

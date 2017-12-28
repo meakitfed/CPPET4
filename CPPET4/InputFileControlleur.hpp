@@ -193,7 +193,9 @@ void InputFileControlleur::objectsInScene()
 			if(s.compare("Sphere:")==0)
 			{
 				o = constrObject(s);
-				scene->getListObjects().push_back(o);
+				scene->getListObjects()->push_back(o);
+				std::cout << "création de " << o << std::endl;
+				std::cout << scene->getListObjects()->size() << std::endl;
 			}
 			else
 			{
@@ -228,9 +230,6 @@ Visible InputFileControlleur::constrObject(std::string s)
 		Visible v;
 		return v;
 	}
-		
-	
-	
 }
 
 #endif

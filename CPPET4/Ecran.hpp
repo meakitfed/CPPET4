@@ -28,7 +28,7 @@ class Ecran
 	}
 	void afficher(std::ostream &flux) const;
 	void initEcran(RGB backgroundColor);
-	void drawImage(Pos posCam, std::vector<Visible> obj);
+	void drawImage(Pos posCam, std::vector<Visible>* obj);
 	Pos getPosAt(int x, int y);
 	Pixel** getPixel() {return pixel;}
 	int getResolution(){return resolution;}
@@ -58,33 +58,34 @@ void Ecran::initEcran(RGB backgroundColor)
 		}
 	}
 }
-void Ecran::drawImage(Pos posCam, std::vector<Visible> obj)
+
+void Ecran::drawImage(Pos posCam, std::vector<Visible>* obj)
 {
 	for(int i=0; i<resolution;i++)
 	{
 		for(int j=0; j<resolution;j++)
 		{
+			int distanceAvecPixel=-1;
+			Intersection inter;
 			Segment s(posCam,pixel[i][j].getPosition());
-			for(std::vector<Visible>::iterator o = obj.begin() ; o != obj.end(); ++o)
+			for(std::vector<Visible>::iterator o = obj->begin() ; o != obj->end(); ++o)
 			{
-				Visible temp = *o;
-				int discri = temp.estTraverse(s);
-				if(discri>0)
+				Intersection* interTemp = (*o).estTraverse(s);
+				if(interTemp != NULL)
 				{
-
+					int d = s.getOrigine().distanceAvecPoint(interTemp->getOrigine());
+					if(distanceAvecPixel > d)
+					{
+						inter = *interTemp;
+						distanceAvecPixel = d;
+					}
 				}
-				else if(discri==0)
-				{
-
-				}
-				else
-				{
-
-				}
+				delete interTemp;
 			}
 		}
 	}
 }
+
 void Ecran::afficher(std::ostream &flux) const
 {
     flux << "Ecran : DH :" << dh << " GH :" << gh << " GB :" << gb << " Resolution : [" << resolution << "]";

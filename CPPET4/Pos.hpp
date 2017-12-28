@@ -2,6 +2,7 @@
 #define POS_H
 
 #include <iostream>
+#include <math.h>
 
 class Pos 
 {
@@ -17,6 +18,7 @@ class Pos
 	float getX(){return x;}
 	float getY(){return y;}
 	float getZ(){return z;}
+	int distanceAvecPoint(Pos p);
 	void afficher(std::ostream &flux) const;
 };
 
@@ -30,6 +32,11 @@ Pos Pos::segment(Pos p2)
 	Pos p(x-p2.getX(), y-p2.getY(), z-p2.getZ());
 	return p;
 } 
+
+int Pos::distanceAvecPoint(Pos p)
+{
+	return sqrt((x-p.getX()) + (y-p.getY()) + (z-p.getZ()));
+}
 
 
 std::ostream &operator<<(std::ostream &flux, Pos const& pos)

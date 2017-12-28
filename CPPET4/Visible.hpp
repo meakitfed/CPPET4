@@ -14,7 +14,7 @@ class Visible : public Objets
 	public :
 	Visible() : Objets(){};
 	Visible(Pos p, RGB c, float r): Objets(p), color(c), reflexion(r){};
-	virtual int estTraverse(Segment s);
+	virtual Intersection* estTraverse(Segment s){return NULL;}
 	virtual void afficher(std::ostream &flux) const;
 };
 

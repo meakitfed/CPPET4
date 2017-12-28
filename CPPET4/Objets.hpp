@@ -22,5 +22,10 @@ class Objets
 	
 };
 
+std::ostream &operator<<(std::ostream &flux, Objets const& o)
+{
+    o.afficher(flux) ;
+    return flux;
+}
 
 #endif
