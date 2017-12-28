@@ -49,7 +49,7 @@ class InputFileControlleur
 	void parseInputFile();
 	Pos recupNextPos();
 	float recupNextFloat();
-	Visible constrObject(std::string s);
+	Visible* constrObject(std::string s);
 
 	
 };
@@ -175,7 +175,7 @@ float InputFileControlleur::recupNextFloat()
 
 void InputFileControlleur::objectsInScene()
 {
-	Visible o;
+	
 	while(!inputFile.eof())
 	{
 		std::string s;
@@ -190,12 +190,11 @@ void InputFileControlleur::objectsInScene()
 			{
 				s+=inputFile.get();
 			}
-			if(s.compare("Sphere:")==0)
+			if(s.compare("sphere:")==0)
 			{
+				Visible* o;
 				o = constrObject(s);
 				scene->getListObjects()->push_back(o);
-				std::cout << "création de " << o << std::endl;
-				std::cout << scene->getListObjects()->size() << std::endl;
 			}
 			else
 			{
@@ -206,7 +205,7 @@ void InputFileControlleur::objectsInScene()
 	}
 }
 
-Visible InputFileControlleur::constrObject(std::string s)
+Visible* InputFileControlleur::constrObject(std::string s)
 {
 	if(s.compare("Sphere"))
 	{
@@ -221,14 +220,13 @@ Visible InputFileControlleur::constrObject(std::string s)
 		sauteCommentairesEtBlancs();
 		float ref(recupNextFloat());
 
-		Sphere sphere(p,c,ref,ray);
-		std::cout << "création de " << sphere << std::endl;
+		Sphere* sphere = new Sphere(p,c,ref,ray);
+		std::cout << "création de " << *sphere << std::endl;
 		return sphere;
 	}
 	else
 	{
-		Visible v;
-		return v;
+		return NULL;
 	}
 }
 

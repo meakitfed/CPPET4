@@ -24,11 +24,13 @@ class Sphere : public Visible
 Intersection* Sphere::estTraverse(Segment s)
 {
 
-	int a = s.getVecteur().getX()*s.getVecteur().getX() + s.getVecteur().getY()*s.getVecteur().getY() +s.getVecteur().getZ()*s.getVecteur().getZ();
-	int b = pow((s.getVecteur().getX()*s.getOrigine().getX()),2) + pow((s.getVecteur().getY()*s.getOrigine().getY()),2) + pow((s.getVecteur().getZ()*s.getOrigine().getZ()),2);
-	int c = pow((s.getOrigine().getX()),2) + pow((s.getOrigine().getY()),2) + pow((s.getOrigine().getZ()),2) - pow(rayon,2);
-
-	int discri = pow(b,2) - 4*a*c;
+	
+	int a = pow(s.getVecteur().getX(),2) + pow(s.getVecteur().getY(),2) +pow(s.getVecteur().getZ(),2);
+	int b = (s.getVecteur().getX()*(s.getOrigine().getX()-position.getX()))*2 + ((s.getVecteur().getY()*(s.getOrigine().getY()-position.getY()))*2) + ((s.getVecteur().getZ()*(s.getOrigine().getZ()-position.getZ()))*2);
+	int c = pow((s.getOrigine().getX()-position.getX()),2) + pow((s.getOrigine().getY()-position.getY()),2) + pow((s.getOrigine().getZ()-position.getZ()),2) - pow(rayon,2);
+	
+	int discri = pow(b,2) - 4*a*c;	
+	
 	if(discri > 0)
 	{
 		int t1 = (- b + sqrt(discri))/ (2*a);
@@ -43,12 +45,17 @@ Intersection* Sphere::estTraverse(Segment s)
 		else
 		{
 			Intersection* i = new Intersection(p2,p1,color); //TODO chnager constructeur intersection(p2 a rien à faire ici)
+			
 			return i;
 		}								 
 	}
 	else if(discri == 0)
 	{
-		return NULL;// rajouter ce cas
+		int t = - b / (2*a);
+		Pos p(s.getVecteur().getX()*t + s.getOrigine().getX(), s.getVecteur().getY()*t + s.getOrigine().getY(),s.getVecteur().getZ()*t + s.getOrigine().getZ());
+		Intersection* i = new Intersection(p,p,color);
+
+		return i;// rajouter ce cas
 	}
 	else
 	{

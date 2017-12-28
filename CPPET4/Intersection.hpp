@@ -18,6 +18,7 @@ class Intersection
 		normale = p1.segment(p2);
 	}
 	Pos getOrigine(){return origine;}
+	RGB getColor(){return color;}
 };
 
 #endif

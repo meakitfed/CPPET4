@@ -29,7 +29,7 @@ void Pos::afficher(std::ostream &flux) const
 
 Pos Pos::segment(Pos p2)
 {	
-	Pos p(x-p2.getX(), y-p2.getY(), z-p2.getZ());
+	Pos p(p2.getX()-x, p2.getY()-y, p2.getZ()-z);
 	return p;
 } 
 

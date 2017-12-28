@@ -17,7 +17,7 @@ class Scene
 	Ecran ecran;
 	RGB backgroundColor;
 	Source src;
-	std::vector<Visible>* objects = new std::vector<Visible>();
+	std::vector<Visible*>* objects = new std::vector<Visible*>;
 
 	public :
 	Scene(){}
@@ -28,7 +28,7 @@ class Scene
 	RGB getBackgroundColor(){return backgroundColor;}
 	void setEcran(Ecran e){ecran = e;}
 	void setSource(Source s){src = s;}
-	std::vector<Visible>* getListObjects(){return objects;}
+	std::vector<Visible*>* getListObjects(){return objects;}
 	Source getSource(){return src;}
 	void setCameraPosition(Pos p){camera.setPosition(p);}
 };
