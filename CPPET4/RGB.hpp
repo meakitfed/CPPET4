@@ -12,6 +12,9 @@ class RGB
 
 	public :
 	void afficher(std::ostream &flux) const;
+    RGB add(RGB const& b) const;
+    RGB mult(float const& a) const;
+
 	RGB(){};
 	RGB(int R1, int G1, int B1) : R(R1), G(G1), B(B1){};
 };
@@ -26,5 +29,39 @@ std::ostream &operator<<(std::ostream &flux, RGB const& rgb)
     rgb.afficher(flux) ;
     return flux;
 }
+
+RGB RGB::add(RGB const& b) const{
+    RGB rst(this->R+b.R,this->G+b.G, this->B+b.B);
+    return rst;
+}
+
+//Esperons que ce soit transitif
+RGB operator+(RGB const& a, RGB const& b)
+{
+    RGB rst;
+    rst = a.add(b);
+    return rst;
+
+    // Calcul des valeurs des attributs de resultat
+
+}
+
+
+RGB RGB::mult(float const& a) const{
+    RGB rst(a*this->R, a*this->G, a*this->B);
+    return rst;
+}
+
+RGB operator*(float const& a, RGB const& b)
+{
+
+    RGB rst;
+    rst = b.mult(a);
+    // Calcul des valeurs des attributs de resultat
+
+    return rst;
+}
+
+
 
 #endif
