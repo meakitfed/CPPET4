@@ -5,13 +5,14 @@
 #include "RGB.hpp"
 #include "Intersection.hpp"
 #include "Segment.hpp"
+#include "Objets.hpp"
+#include "Visible.hpp"
+#include "Sphere.hpp"
 /*#include "InputFileControlleur.hpp"
 #include "OutputFileControlleur.hpp"
-#include "Objets.hpp"
 #include "Scene.hpp"
 #include "Camera.hpp"
 #include "Source.hpp"
-#include "Visible.hpp"
 */
 
 using namespace std;

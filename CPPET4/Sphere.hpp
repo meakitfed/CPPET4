@@ -16,6 +16,7 @@ class Sphere : public Visible
 	Sphere(Pos p, RGB c, float r, float ray) : Visible(p,c,r), rayon(ray) {}
 	virtual void afficher(std::ostream &flux) const;
 	virtual Intersection* estTraverse(Segment s);
+	virtual void calculNormale ( Intersection* inter);
 };
 
 
@@ -73,4 +74,11 @@ std::ostream &operator<<(std::ostream &flux, Sphere const& s)
     s.afficher(flux) ;
     return flux;
 }
+
+void Sphere::calculNormale(Intersection* inter){
+	inter->setNormale(this->position.segment(inter->getOrigine()));
+}
+
+
+
 #endif
