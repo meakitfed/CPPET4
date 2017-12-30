@@ -8,12 +8,12 @@
 #include "Objets.hpp"
 #include "Visible.hpp"
 #include "Sphere.hpp"
-/*#include "InputFileControlleur.hpp"
+#include "InputFileControlleur.hpp"
 #include "OutputFileControlleur.hpp"
 #include "Scene.hpp"
 #include "Camera.hpp"
 #include "Source.hpp"
-*/
+
 
 using namespace std;
 
@@ -25,12 +25,15 @@ int main()
 	OutputFileControlleur o(s,"hey");
 	o.writeInOutputFile();*/
 
-	RGB c(1,2,3);
-	RGB co(3,2,1);
-	RGB cou(6,6,6);
-	RGB couy = 2*(c+co+cou);
+	Pos p(2,0,0);
+	Pos p1(0,0,0);
+	Pos p2(1,0,0);
+	RGB color(0,0,0);
+	Sphere s(p, color, 0, 1);
+	Segment seg(p1,p2);
+	Intersection* i = s.estTraverse(seg);
 
-	cout << couy << endl;
+	cout << i->getOrigine().getX() << " puis normale " << i->getNormale().getX() << endl;
 
 	return 0;
 }

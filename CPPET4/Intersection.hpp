@@ -18,7 +18,7 @@ class Intersection
 	Intersection(){};
 	Intersection(Pos p1, Pos p2, RGB c) : origine(p1), color(c)
 	{
-		normale = p1.segment(p2);
+		normale = p2.segment(p1);
 	}
 
 	Pos getOrigine(){return origine;}

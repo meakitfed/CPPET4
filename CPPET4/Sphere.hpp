@@ -40,12 +40,12 @@ Intersection* Sphere::estTraverse(Segment s)
 		Pos p2(s.getVecteur().getX()*t2 + s.getOrigine().getX(), s.getVecteur().getY()*t2 + s.getOrigine().getY(),s.getVecteur().getZ()*t2 + s.getOrigine().getZ());
 		if(s.getOrigine().distanceAvecPoint(p1) < s.getOrigine().distanceAvecPoint(p2))
 		{
-			Intersection* i = new Intersection(p1,p2,color); //TODO chnager constructeur intersection(p2 a rien à faire ici)
+			Intersection* i = new Intersection(p1,this->position,color);
 			return i;
 		}
 		else
 		{
-			Intersection* i = new Intersection(p2,p1,color); //TODO chnager constructeur intersection(p2 a rien à faire ici)
+			Intersection* i = new Intersection(p2,this->position,color);
 			
 			return i;
 		}								 
@@ -54,7 +54,7 @@ Intersection* Sphere::estTraverse(Segment s)
 	{
 		int t = - b / (2*a);
 		Pos p(s.getVecteur().getX()*t + s.getOrigine().getX(), s.getVecteur().getY()*t + s.getOrigine().getY(),s.getVecteur().getZ()*t + s.getOrigine().getZ());
-		Intersection* i = new Intersection(p,p,color);
+		Intersection* i = new Intersection(p,this->position,color);
 
 		return i;// rajouter ce cas
 	}

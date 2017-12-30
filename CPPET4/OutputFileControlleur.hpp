@@ -38,7 +38,7 @@ class OutputFileControlleur
 	void writeInOutputFile()
 	{
 		scene->getEcran().initEcran(scene->getBackgroundColor());
-		scene->getEcran().drawImage(scene->getCamera().getPosition(), scene->getListObjects());
+		scene->getEcran().drawImage(scene->getCamera().getPosition(), scene->getListObjects(), scene->getSource());
 		outputFile << "P3" << std::endl;
 		outputFile << scene->getEcran().getResolution() << " " << scene->getEcran().getResolution() << "\n";
 

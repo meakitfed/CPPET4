@@ -2,13 +2,18 @@
 #define SOURCE_H 
 
 #include "Visible.hpp"
+#include <iostream>
 
-class Source : Visible
+class Source : public Visible
 {
 	public :
 	Source() : Visible() {};
 	Source(Pos p, RGB c) : Visible(p,c,0) {};
-	virtual void afficher(std::ostream &flux) const;	
+	virtual void afficher(std::ostream &flux) const;
+
+	//TO DO ces deux fonction sont juste là paske source extends visible. C'est nul
+	virtual void calculNormale(Intersection* inter){inter = inter;};
+	virtual Intersection* estTraverse(Segment s){Intersection* nul = NULL; s=s; return nul;};	
 };
 
 void Source::afficher(std::ostream &flux) const

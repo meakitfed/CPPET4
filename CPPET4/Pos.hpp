@@ -23,7 +23,7 @@ class Pos
 	void setX(float x){this->x = x;}
 	void setY(float y){this->y = y;}
 	void setZ(float z){this->z = z;}
-	int distanceAvecPoint(Pos p);
+	float distanceAvecPoint(Pos p);
 	void afficher(std::ostream &flux) const;
 	float calculeCos(Pos vecteur2) const;
 };
@@ -35,11 +35,11 @@ void Pos::afficher(std::ostream &flux) const
 
 Pos Pos::segment(Pos p2)
 {	
-	Pos p(p2.getX()-x, p2.getY()-y, p2.getZ()-z);
+	Pos p(pow(p2.getX()-x,2), pow(p2.getY()-y,2), pow(p2.getZ()-z,2));
 	return p;
 } 
 
-int Pos::distanceAvecPoint(Pos p)
+float Pos::distanceAvecPoint(Pos p)
 {
 	return sqrt((x-p.getX()) + (y-p.getY()) + (z-p.getZ()));
 }

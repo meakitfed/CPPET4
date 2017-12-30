@@ -4,6 +4,7 @@
 
 #include "Objets.hpp"
 #include "Segment.hpp"
+#include "RGB.hpp"
 
 
 class Visible : public Objets
@@ -18,6 +19,8 @@ class Visible : public Objets
 	virtual void calculNormale(Intersection* inter) = 0;
 	virtual Intersection* estTraverse(Segment s) = 0;
 	virtual void afficher(std::ostream &flux) const;
+	void setColor(RGB color){this->color = color;}
+	RGB getColor(){return color;}
 };
 
 void Visible::afficher(std::ostream &flux) const

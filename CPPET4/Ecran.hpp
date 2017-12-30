@@ -28,7 +28,7 @@ class Ecran
 	}
 	void afficher(std::ostream &flux) const;
 	void initEcran(RGB backgroundColor);
-	void drawImage(Pos posCam, std::vector<Visible*>* obj);
+	void drawImage(Pos posCam, std::vector<Visible*>* obj, Source src);
 	Pos getPosAt(int x, int y);
 	Pixel** getPixel() {return pixel;}
 	int getResolution(){return resolution;}
@@ -59,34 +59,15 @@ void Ecran::initEcran(RGB backgroundColor)
 	}
 }
 
-void Ecran::drawImage(Pos posCam, std::vector<Visible*>* obj)
+//TO DO : modifier tous les appels de draw image pour enlever src
+void Ecran::drawImage(Pos posCam, std::vector<Visible*>* obj, Source src)
 {
+	//pour chaque pixel
 	for(int i=0; i<resolution;i++)
 	{
 		for(int j=0; j<resolution;j++)
 		{
-			int distanceAvecPixel=-1;
-			Intersection inter;
-
-			Segment s(posCam,pixel[i][j].getPosition());
-			for(std::vector<Visible*>::iterator o = obj->begin() ; o != obj->end(); ++o)
-			{
-				Intersection* interTemp = (*o)->estTraverse(s);
-				if(interTemp != NULL)
-				{
-					int d = s.getOrigine().distanceAvecPoint(interTemp->getOrigine());
-					if(distanceAvecPixel > d)
-					{
-						inter = *interTemp;
-						distanceAvecPixel = d;
-					}
-				}
-				delete interTemp;
-			}
-			if(distanceAvecPixel!=-1)
-			{
-				pixel[i][j].setColor(inter.getColor());
-			}
+			pixel[i][j].drawPixel(posCam, obj, src);
 		}
 	}
 }
