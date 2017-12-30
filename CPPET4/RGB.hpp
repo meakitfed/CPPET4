@@ -49,7 +49,19 @@ RGB operator+(RGB const& a, RGB const& b)
 
 
 RGB RGB::mult1(float const& a) const{
-    RGB rst(a*this->R, a*this->G, a*this->B);
+    RGB rst(int(a*this->R), int(a*this->G), int(a*this->B));
+    if (rst.R >255)
+        rst.R = 255;
+    if (rst.G >255)
+        rst.G = 255;
+    if (rst.B >255)
+        rst.B = 255;
+    if (rst.R <0)
+        rst.R = 0;
+    if (rst.G <0)
+        rst.G = 0;
+    if (rst.B <0)
+        rst.B = 0;
     return rst;
 }
 
@@ -64,7 +76,19 @@ RGB operator*(float const& a, RGB const& b)
 }
 
 RGB RGB::mult2(RGB const& b) const{
-    RGB rst(this->R*b.R, this->G*b.G, this->B*b.B);
+    RGB rst(int(this->R*b.R/255), int(this->G*b.G/255), int(this->B*b.B/255));
+    if (rst.R >255)
+        rst.R = 255;
+    if (rst.G >255)
+        rst.G = 255;
+    if (rst.B >255)
+        rst.B = 255;
+    if (rst.R <0)
+        rst.R = 0;
+    if (rst.G <0)
+        rst.G = 0;
+    if (rst.B <0)
+        rst.B = 0;
     return rst;
 }
 

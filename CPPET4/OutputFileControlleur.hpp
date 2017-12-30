@@ -32,7 +32,7 @@ class OutputFileControlleur
         }
         else
         {
-            std::cout << outputFileName <<" a été ouvekrt !" << std::endl;
+            std::cout << outputFileName <<" a été ouvert !" << std::endl;
         }
 	};
 	void writeInOutputFile()

@@ -65,38 +65,41 @@ class Pixel
 
 void Pixel::drawPixel(Pos posCam, std::vector<Visible*>* obj, Source src){
 	float distanceAvecPixel=-1;
-			Intersection inter;
+	Intersection inter;
 
-			//creation du segment qui part de cam vers le pixel
-			Segment s(posCam,this->getPosition());
+	//creation du segment qui part de cam vers le pixel
+	Segment s(posCam,this->getPosition());
 
-			//pour tout les objets visibles
-			for(std::vector<Visible*>::iterator o = obj->begin() ; o != obj->end(); ++o)
+	//pour tout les objets visibles
+	for(std::vector<Visible*>::iterator o = obj->begin() ; o != obj->end(); ++o)
+	{
+		Intersection* interTemp = (*o)->estTraverse(s);
+
+		//si intersection trouvee
+		//on met à jour la distance si nécessaire
+		if(interTemp != NULL)
+		{
+			//std::cout << "lol" << std::endl;
+			float d = s.getOrigine().distanceAvecPoint(interTemp->getOrigine());
+			if(distanceAvecPixel > d || distanceAvecPixel==-1)
 			{
-				Intersection* interTemp = (*o)->estTraverse(s);
-
-				//si intersection trouvee
-				//on met à jour la distance si nécessaire
-				if(interTemp != NULL)
-				{
-					float d = s.getOrigine().distanceAvecPoint(interTemp->getOrigine());
-					if(distanceAvecPixel > d || distanceAvecPixel == 1)
-					{
-						inter = *interTemp;
-						distanceAvecPixel = d;
-					}
-				}
-				delete interTemp;
+				inter = *interTemp;
+				distanceAvecPixel = d;
 			}
+		}
+		delete interTemp;
+	}
 			
-			if(distanceAvecPixel!=-1)
-			{
-				//rajouter calcul d'obsacle entre inter et src
-				//RGB couleurCalculee;
-				//Segment intersrc(inter.getOrigine(), src.getPosition());
-				//couleurCalculee = inter.getNormale().calculeCos(intersrc.getVecteur())*inter.getColor()*src.getColor();
-				this->setColor(inter.getColor());
-			}
+	if(distanceAvecPixel!=-1)
+	{
+		//rajouter calcul d'obsacle entre inter et src
+		RGB couleurCalculee;
+		Segment intersrc(inter.getOrigine(), src.getPosition());
+		couleurCalculee = inter.getNormale().calculeCos(intersrc.getVecteur())*inter.getColor()*src.getColor();
+		std::cout << inter.getNormale().calculeCos(intersrc.getVecteur()) << std::endl;
+		this->setColor(couleurCalculee);
+		//this->setColor(inter.getColor());
+	}
 }
 
 #endif

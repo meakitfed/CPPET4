@@ -35,13 +35,13 @@ void Pos::afficher(std::ostream &flux) const
 
 Pos Pos::segment(Pos p2)
 {	
-	Pos p(pow(p2.getX()-x,2), pow(p2.getY()-y,2), pow(p2.getZ()-z,2));
+	Pos p(p2.getX()-x, p2.getY()-y, p2.getZ()-z);
 	return p;
 } 
 
 float Pos::distanceAvecPoint(Pos p)
 {
-	return sqrt((x-p.getX()) + (y-p.getY()) + (z-p.getZ()));
+	return sqrt(pow((x-p.getX()),2) + pow((y-p.getY()),2) + pow((z-p.getZ()),2));
 }
 
 
